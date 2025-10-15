@@ -1,0 +1,257 @@
+{
+  "levels": [
+    {
+      "id": "level-postgresql",
+      "name": "PostgreSQL Query Lineage",
+      "nodes": [
+        {
+          "id": "query-1",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 250
+          },
+          "data": {
+            "label": "INSERT",
+            "tool": "SQL",
+            "process": "Insert Data",
+            "description": "User: etl_user",
+            "metadata": {
+              "statement": "INSERT INTO customer_summary SELECT customer_id, COUNT(*) as order_count FROM orders GROUP BY custom...",
+              "user": "etl_user",
+              "database": "analytics"
+            }
+          }
+        },
+        {
+          "id": "target-customer_summary",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 250
+          },
+          "data": {
+            "label": "customer_summary",
+            "tool": "PostgreSQL",
+            "process": "Target Table",
+            "description": "Database: analytics",
+            "metadata": {
+              "database": "analytics",
+              "table": "customer_summary"
+            }
+          }
+        },
+        {
+          "id": "query-2",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 400
+          },
+          "data": {
+            "label": "CREATE TABLE",
+            "tool": "SQL",
+            "process": "Create Table",
+            "description": "User: analytics_user",
+            "metadata": {
+              "statement": "CREATE TABLE daily_revenue AS SELECT DATE(order_date) as date, SUM(amount) as revenue FROM orders JO...",
+              "user": "analytics_user",
+              "database": "analytics"
+            }
+          }
+        },
+        {
+          "id": "target-daily_revenue",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 400
+          },
+          "data": {
+            "label": "daily_revenue",
+            "tool": "PostgreSQL",
+            "process": "Target Table",
+            "description": "Database: analytics",
+            "metadata": {
+              "database": "analytics",
+              "table": "daily_revenue"
+            }
+          }
+        },
+        {
+          "id": "source-customer_metrics",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 550
+          },
+          "data": {
+            "label": "customer_metrics",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Database: analytics",
+            "metadata": {
+              "database": "analytics",
+              "table": "customer_metrics"
+            }
+          }
+        },
+        {
+          "id": "query-3",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 550
+          },
+          "data": {
+            "label": "UPDATE",
+            "tool": "SQL",
+            "process": "Update Data",
+            "description": "User: etl_user",
+            "metadata": {
+              "statement": "UPDATE customer_metrics SET last_updated = NOW() WHERE customer_id IN (SELECT customer_id FROM recen...",
+              "user": "etl_user",
+              "database": "analytics"
+            }
+          }
+        },
+        {
+          "id": "query-4",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 700
+          },
+          "data": {
+            "label": "INSERT",
+            "tool": "SQL",
+            "process": "Insert Data",
+            "description": "User: data_engineer",
+            "metadata": {
+              "statement": "INSERT INTO fact_sales SELECT o.id, o.customer_id, o.amount, p.payment_method, p.status FROM orders ...",
+              "user": "data_engineer",
+              "database": "warehouse"
+            }
+          }
+        },
+        {
+          "id": "target-fact_sales",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 700
+          },
+          "data": {
+            "label": "fact_sales",
+            "tool": "PostgreSQL",
+            "process": "Target Table",
+            "description": "Database: warehouse",
+            "metadata": {
+              "database": "warehouse",
+              "table": "fact_sales"
+            }
+          }
+        },
+        {
+          "id": "source-c",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 850
+          },
+          "data": {
+            "label": "c",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Database: analytics",
+            "metadata": {
+              "database": "analytics",
+              "table": "c"
+            }
+          }
+        },
+        {
+          "id": "query-5",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 850
+          },
+          "data": {
+            "label": "CREATE TABLE",
+            "tool": "SQL",
+            "process": "Create Table",
+            "description": "User: analytics_user",
+            "metadata": {
+              "statement": "CREATE TABLE customer_360 AS SELECT c.customer_id, c.name, c.email, SUM(o.amount) as total_spent, CO...",
+              "user": "analytics_user",
+              "database": "analytics"
+            }
+          }
+        },
+        {
+          "id": "target-customer_360",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 850
+          },
+          "data": {
+            "label": "customer_360",
+            "tool": "PostgreSQL",
+            "process": "Target Table",
+            "description": "Database: analytics",
+            "metadata": {
+              "database": "analytics",
+              "table": "customer_360"
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "query-1-target-customer_summary",
+          "source": "query-1",
+          "target": "target-customer_summary",
+          "animated": true
+        },
+        {
+          "id": "query-2-target-daily_revenue",
+          "source": "query-2",
+          "target": "target-daily_revenue",
+          "animated": true
+        },
+        {
+          "id": "source-customer_metrics-query-3",
+          "source": "source-customer_metrics",
+          "target": "query-3",
+          "animated": true
+        },
+        {
+          "id": "query-3-source-customer_metrics",
+          "source": "query-3",
+          "target": "source-customer_metrics",
+          "animated": true
+        },
+        {
+          "id": "query-4-target-fact_sales",
+          "source": "query-4",
+          "target": "target-fact_sales",
+          "animated": true
+        },
+        {
+          "id": "source-c-query-5",
+          "source": "source-c",
+          "target": "query-5",
+          "animated": true
+        },
+        {
+          "id": "query-5-target-customer_360",
+          "source": "query-5",
+          "target": "target-customer_360",
+          "animated": true
+        }
+      ]
+    }
+  ]
+}

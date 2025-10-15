@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0D0D0D;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Custom Node Styles */
+.custom-node {
+  position: relative;
+  padding: 3px;
+  min-width: 200px;
+  max-width: 220px;
+  background: linear-gradient(90deg, #FF00FF 0%, #00FFFF 100%);
+  border-radius: 8px;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.5)) drop-shadow(0 0 8px rgba(0, 255, 255, 0.5));
+}
+
+.custom-node::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  background: #1A1A1A;
+  border-radius: 5px;
+  z-index: 0;
+}
+
+.node-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 13px 17px;
+}
+
+/* Custom Handle Styles */
+.handle-custom {
+  width: 12px;
+  height: 12px;
+  background: #00FFFF;
+  border: 2px solid #0D0D0D;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+/* ReactFlow Edge Styles */
+.react-flow__edge-path {
+  stroke: url(#edge-gradient);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgba(100, 100, 255, 0.6));
+}
+
+/* Edge type: data_flow (solid animated) */
+.react-flow__edge.edge-data-flow .react-flow__edge-path {
+  stroke: url(#edge-gradient);
+  stroke-width: 2.5;
+}
+
+/* Edge type: dependency (dashed) */
+.react-flow__edge.edge-dependency .react-flow__edge-path {
+  stroke: #8B5CF6;
+  stroke-width: 2;
+  stroke-dasharray: 8, 4;
+}
+
+/* Edge type: trigger (dotted) */
+.react-flow__edge.edge-trigger .react-flow__edge-path {
+  stroke: #00FFFF;
+  stroke-width: 2;
+  stroke-dasharray: 2, 4;
+}
+
+/* Edge type: reference (thin) */
+.react-flow__edge.edge-reference .react-flow__edge-path {
+  stroke: #666;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+/* Edge type: data_flow (solid animated) */
+.react-flow__edge.edge-data-flow .react-flow__edge-path {
+  stroke: url(#edge-gradient);
+  stroke-width: 2.5;
+  animation: dash 20s linear infinite;
+}
+
+/* Edge type: dependency (dashed) */
+.react-flow__edge.edge-dependency .react-flow__edge-path {
+  stroke: #8B5CF6;
+  stroke-width: 2;
+  stroke-dasharray: 8, 4;
+}
+
+/* Edge type: trigger (dotted with glow) */
+.react-flow__edge.edge-trigger .react-flow__edge-path {
+  stroke: #00FFFF;
+  stroke-width: 2;
+  stroke-dasharray: 2, 4;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.8));
+}
+
+/* Edge type: reference (thin line) */
+.react-flow__edge.edge-reference .react-flow__edge-path {
+  stroke: #666;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 8 4;
+  animation: dashdraw 1s linear infinite;
+  stroke-width: 3;
+}
+
+@keyframes dashdraw {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+/* Dark theme for ReactFlow */
+.react-flow {
+  background: #0D0D0D;
+}
+
+.react-flow__node {
+  cursor: pointer;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.react-flow__node-default,
+.react-flow__node-input,
+.react-flow__node-output {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.react-flow__node.selected .custom-node {
+  filter: drop-shadow(0 0 16px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 16px rgba(0, 255, 255, 0.8));
+}
+
+/* Controls styling */
+.react-flow__controls {
+  background: #1A1A1A;
+  border: 1px solid #333;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.react-flow__controls-button {
+  background: #1A1A1A;
+  border-bottom: 1px solid #333;
+  color: #00FFFF;
+}
+
+.react-flow__controls-button:hover {
+  background: #2A2A2A;
+}
+
+/* MiniMap styling */
+.react-flow__minimap {
+  background: #1A1A1A;
+  border: 1px solid #333;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(0, 255, 255, 0.1);
+}
+
+/* Background dots */
+.react-flow__background {
+  background-color: #0D0D0D;
+}
+
+.react-flow__background-pattern {
+  stroke: #2A2A2A;
+}

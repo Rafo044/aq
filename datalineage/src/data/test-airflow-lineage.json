@@ -1,0 +1,293 @@
+{
+  "levels": [
+    {
+      "id": "level-airflow",
+      "name": "Airflow DAG Execution",
+      "nodes": [
+        {
+          "id": "source-0",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 100
+          },
+          "data": {
+            "label": "<source_uri>",
+            "tool": "Unknown",
+            "process": "Source",
+            "description": "<source_uri>",
+            "metadata": {
+              "uri": "<source_uri>"
+            }
+          }
+        },
+        {
+          "id": "task-0",
+          "type": "default",
+          "position": {
+            "x": 350,
+            "y": 100
+          },
+          "data": {
+            "label": "<task_name>",
+            "tool": "Python",
+            "process": "Airflow Task",
+            "description": "Processing: <task_name>",
+            "metadata": {
+              "taskId": "<task_name>"
+            }
+          }
+        },
+        {
+          "id": "target-1",
+          "type": "output",
+          "position": {
+            "x": 600,
+            "y": 100
+          },
+          "data": {
+            "label": "<target_uri>",
+            "tool": "Unknown",
+            "process": "Target",
+            "description": "<target_uri>",
+            "metadata": {
+              "uri": "<target_uri>"
+            }
+          }
+        },
+        {
+          "id": "source-2",
+          "type": "input",
+          "position": {
+            "x": 850,
+            "y": 100
+          },
+          "data": {
+            "label": "customers.users",
+            "tool": "PostgreSQL",
+            "process": "Source",
+            "description": "postgres://prod-db/customers.users",
+            "metadata": {
+              "uri": "postgres://prod-db/customers.users"
+            }
+          }
+        },
+        {
+          "id": "task-1",
+          "type": "default",
+          "position": {
+            "x": 1100,
+            "y": 100
+          },
+          "data": {
+            "label": "extract_customers",
+            "tool": "Python",
+            "process": "Airflow Task",
+            "description": "Processing: extract_customers",
+            "metadata": {
+              "taskId": "extract_customers"
+            }
+          }
+        },
+        {
+          "id": "target-3",
+          "type": "output",
+          "position": {
+            "x": 1350,
+            "y": 100
+          },
+          "data": {
+            "label": "customers.parquet",
+            "tool": "S3",
+            "process": "Target",
+            "description": "s3://data-lake/raw/customers.parquet",
+            "metadata": {
+              "uri": "s3://data-lake/raw/customers.parquet"
+            }
+          }
+        },
+        {
+          "id": "source-4",
+          "type": "input",
+          "position": {
+            "x": 1600,
+            "y": 100
+          },
+          "data": {
+            "label": "customers.orders",
+            "tool": "PostgreSQL",
+            "process": "Source",
+            "description": "postgres://prod-db/customers.orders",
+            "metadata": {
+              "uri": "postgres://prod-db/customers.orders"
+            }
+          }
+        },
+        {
+          "id": "task-2",
+          "type": "default",
+          "position": {
+            "x": 1850,
+            "y": 100
+          },
+          "data": {
+            "label": "extract_orders",
+            "tool": "Python",
+            "process": "Airflow Task",
+            "description": "Processing: extract_orders",
+            "metadata": {
+              "taskId": "extract_orders"
+            }
+          }
+        },
+        {
+          "id": "target-5",
+          "type": "output",
+          "position": {
+            "x": 2100,
+            "y": 100
+          },
+          "data": {
+            "label": "orders.parquet",
+            "tool": "S3",
+            "process": "Target",
+            "description": "s3://data-lake/raw/orders.parquet",
+            "metadata": {
+              "uri": "s3://data-lake/raw/orders.parquet"
+            }
+          }
+        },
+        {
+          "id": "task-3",
+          "type": "default",
+          "position": {
+            "x": 2350,
+            "y": 100
+          },
+          "data": {
+            "label": "transform_customer_data",
+            "tool": "Python",
+            "process": "Airflow Task",
+            "description": "Processing: transform_customer_data",
+            "metadata": {
+              "taskId": "transform_customer_data"
+            }
+          }
+        },
+        {
+          "id": "target-6",
+          "type": "output",
+          "position": {
+            "x": 2600,
+            "y": 100
+          },
+          "data": {
+            "label": "customers_clean.parquet",
+            "tool": "S3",
+            "process": "Target",
+            "description": "s3://data-lake/transformed/customers_clean.parquet",
+            "metadata": {
+              "uri": "s3://data-lake/transformed/customers_clean.parquet"
+            }
+          }
+        },
+        {
+          "id": "task-4",
+          "type": "default",
+          "position": {
+            "x": 2850,
+            "y": 100
+          },
+          "data": {
+            "label": "load_to_warehouse",
+            "tool": "Python",
+            "process": "Airflow Task",
+            "description": "Processing: load_to_warehouse",
+            "metadata": {
+              "taskId": "load_to_warehouse"
+            }
+          }
+        },
+        {
+          "id": "target-7",
+          "type": "output",
+          "position": {
+            "x": 3100,
+            "y": 100
+          },
+          "data": {
+            "label": "prod.customers",
+            "tool": "Snowflake",
+            "process": "Target",
+            "description": "snowflake://analytics/prod.customers",
+            "metadata": {
+              "uri": "snowflake://analytics/prod.customers"
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "source-0-task-0",
+          "source": "source-0",
+          "target": "task-0",
+          "animated": true
+        },
+        {
+          "id": "task-0-target-1",
+          "source": "task-0",
+          "target": "target-1",
+          "animated": true
+        },
+        {
+          "id": "source-2-task-1",
+          "source": "source-2",
+          "target": "task-1",
+          "animated": true
+        },
+        {
+          "id": "task-1-target-3",
+          "source": "task-1",
+          "target": "target-3",
+          "animated": true
+        },
+        {
+          "id": "source-4-task-2",
+          "source": "source-4",
+          "target": "task-2",
+          "animated": true
+        },
+        {
+          "id": "task-2-target-5",
+          "source": "task-2",
+          "target": "target-5",
+          "animated": true
+        },
+        {
+          "id": "target-3-task-3",
+          "source": "target-3",
+          "target": "task-3",
+          "animated": true
+        },
+        {
+          "id": "task-3-target-6",
+          "source": "task-3",
+          "target": "target-6",
+          "animated": true
+        },
+        {
+          "id": "target-6-task-4",
+          "source": "target-6",
+          "target": "task-4",
+          "animated": true
+        },
+        {
+          "id": "task-4-target-7",
+          "source": "task-4",
+          "target": "target-7",
+          "animated": true
+        }
+      ]
+    }
+  ]
+}

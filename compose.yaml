@@ -1,0 +1,54 @@
+services:
+  pgdata:
+    image: postgres:18
+    container_name: pgdata
+    networks:
+      - openaq
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  parser:
+    container_name: parser
+    build:
+      context: ./parser
+      dockerfile: Dockerfile
+    volumes:
+      - ./parser:/app/parser
+      - ./datalineage/public:/app/logs
+    networks:
+      - openaq
+    tty: true
+    stdin_open: true
+    command: tail -f /dev/null
+    depends_on:
+      - pgdata
+
+  datalineage:
+    container_name: datalineage
+    build:
+      context: ./datalineage
+      dockerfile: Dockerfile
+    volumes:
+      - ./datalineage:/app
+    networks:
+      - openaq
+    ports:
+      - "${DATALINEAGE_PORT}:${DATALINEAGE_PORT}"
+    depends_on:
+      - pgdata
+    tty: true
+    stdin_open: true
+    command: tail -f /dev/null
+
+networks:
+  openaq:
+    driver: bridge

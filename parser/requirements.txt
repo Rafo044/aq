@@ -1,0 +1,17 @@
+luigi
+lockfile
+python-daemon
+python-dateutil
+six
+tenacity
+tornado
+dotenv
+python-dotenv
+annotated-types
+psycopg2-binary
+pydantic
+pydantic-core
+typing-extensions
+typing-inspection
+requests
+loguru

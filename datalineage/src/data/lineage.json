@@ -1,0 +1,325 @@
+{
+  "levels": [
+    {
+      "id": "level-high",
+      "name": "High Level Overview",
+      "nodes": [
+        {
+          "id": "source-1",
+          "type": "input",
+          "position": { "x": 100, "y": 100 },
+          "data": {
+            "label": "Customer DB",
+            "tool": "PostgreSQL",
+            "process": "Source System",
+            "description": "Production database with customer data",
+            "metadata": {
+              "type": "PostgreSQL",
+              "schema": "customers"
+            }
+          }
+        },
+        {
+          "id": "etl-1",
+          "type": "default",
+          "position": { "x": 400, "y": 100 },
+          "data": {
+            "label": "ETL Pipeline",
+            "tool": "Python",
+            "process": "Extract → Transform → Load",
+            "description": "Daily batch processing",
+            "metadata": {
+              "tool": "Apache Airflow",
+              "schedule": "Daily"
+            }
+          }
+        },
+        {
+          "id": "warehouse-1",
+          "type": "output",
+          "position": { "x": 700, "y": 100 },
+          "data": {
+            "label": "Analytics DWH",
+            "tool": "Snowflake",
+            "process": "Data Warehouse",
+            "description": "Centralized analytics storage",
+            "metadata": {
+              "type": "Snowflake",
+              "database": "analytics"
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1-2",
+          "source": "source-1",
+          "target": "etl-1",
+          "animated": true
+        },
+        {
+          "id": "e2-3",
+          "source": "etl-1",
+          "target": "warehouse-1",
+          "animated": true
+        }
+      ]
+    },
+    {
+      "id": "level-detailed",
+      "name": "Detailed Pipeline View",
+      "nodes": [
+        {
+          "id": "source-db",
+          "type": "input",
+          "position": { "x": 50, "y": 150 },
+          "data": {
+            "label": "customers_db",
+            "tool": "PostgreSQL",
+            "process": "OLTP Database",
+            "description": "Tables: users, orders, payments",
+            "metadata": {
+              "tables": ["users", "orders", "payments"]
+            }
+          }
+        },
+        {
+          "id": "extract",
+          "type": "default",
+          "position": { "x": 280, "y": 50 },
+          "data": {
+            "label": "Extract",
+            "tool": "Python",
+            "process": "Full Refresh",
+            "description": "Read from source tables",
+            "metadata": {
+              "method": "Full refresh"
+            }
+          }
+        },
+        {
+          "id": "transform",
+          "type": "default",
+          "position": { "x": 280, "y": 150 },
+          "data": {
+            "label": "Transform",
+            "tool": "dbt",
+            "process": "Dedupe → Normalize → Enrich",
+            "description": "Data cleaning and enrichment",
+            "metadata": {
+              "operations": ["dedupe", "normalize", "enrich"]
+            }
+          }
+        },
+        {
+          "id": "validate",
+          "type": "default",
+          "position": { "x": 280, "y": 250 },
+          "data": {
+            "label": "Validate",
+            "tool": "Great Expectations",
+            "process": "Quality Checks",
+            "description": "Schema & null validation",
+            "metadata": {
+              "checks": ["null_check", "schema_validation"]
+            }
+          }
+        },
+        {
+          "id": "load",
+          "type": "default",
+          "position": { "x": 510, "y": 150 },
+          "data": {
+            "label": "Load",
+            "tool": "Python",
+            "process": "Incremental Load",
+            "description": "Write to warehouse",
+            "metadata": {
+              "method": "Incremental"
+            }
+          }
+        },
+        {
+          "id": "warehouse",
+          "type": "output",
+          "position": { "x": 740, "y": 150 },
+          "data": {
+            "label": "analytics_warehouse",
+            "tool": "Snowflake",
+            "process": "Data Warehouse",
+            "description": "Schema: prod.analytics",
+            "metadata": {
+              "schema": "prod.analytics"
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "source-db",
+          "target": "extract",
+          "animated": true
+        },
+        {
+          "id": "e2",
+          "source": "source-db",
+          "target": "transform",
+          "animated": true
+        },
+        {
+          "id": "e3",
+          "source": "source-db",
+          "target": "validate",
+          "animated": true
+        },
+        {
+          "id": "e4",
+          "source": "extract",
+          "target": "load",
+          "animated": true
+        },
+        {
+          "id": "e5",
+          "source": "transform",
+          "target": "load",
+          "animated": true
+        },
+        {
+          "id": "e6",
+          "source": "validate",
+          "target": "load",
+          "animated": true
+        },
+        {
+          "id": "e7",
+          "source": "load",
+          "target": "warehouse",
+          "animated": true
+        }
+      ]
+    },
+    {
+      "id": "level-granular",
+      "name": "Table-Level Lineage",
+      "nodes": [
+        {
+          "id": "users-table",
+          "type": "input",
+          "position": { "x": 50, "y": 50 },
+          "data": {
+            "label": "users",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Cols: id, name, email, created_at",
+            "metadata": {
+              "columns": ["id", "name", "email", "created_at"]
+            }
+          }
+        },
+        {
+          "id": "orders-table",
+          "type": "input",
+          "position": { "x": 50, "y": 160 },
+          "data": {
+            "label": "orders",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Cols: id, user_id, amount, order_date",
+            "metadata": {
+              "columns": ["id", "user_id", "amount", "order_date"]
+            }
+          }
+        },
+        {
+          "id": "payments-table",
+          "type": "input",
+          "position": { "x": 50, "y": 270 },
+          "data": {
+            "label": "payments",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Cols: id, order_id, amount, status",
+            "metadata": {
+              "columns": ["id", "order_id", "amount", "status"]
+            }
+          }
+        },
+        {
+          "id": "join-transform",
+          "type": "default",
+          "position": { "x": 350, "y": 160 },
+          "data": {
+            "label": "Join & Aggregate",
+            "tool": "SQL",
+            "process": "JOIN → GROUP BY → AGGREGATE",
+            "description": "Combine tables and calculate metrics",
+            "metadata": {
+              "sql": "SELECT u.*, o.*, p.* FROM users u JOIN orders o ON u.id = o.user_id JOIN payments p ON o.id = p.order_id"
+            }
+          }
+        },
+        {
+          "id": "customer-metrics",
+          "type": "output",
+          "position": { "x": 650, "y": 100 },
+          "data": {
+            "label": "customer_metrics",
+            "tool": "Snowflake",
+            "process": "Materialized View",
+            "description": "Customer analytics aggregates",
+            "metadata": {
+              "columns": ["user_id", "total_orders", "total_spent", "avg_order_value"]
+            }
+          }
+        },
+        {
+          "id": "revenue-summary",
+          "type": "output",
+          "position": { "x": 650, "y": 220 },
+          "data": {
+            "label": "revenue_summary",
+            "tool": "Snowflake",
+            "process": "Materialized View",
+            "description": "Daily revenue aggregates",
+            "metadata": {
+              "columns": ["date", "total_revenue", "order_count", "avg_order_value"]
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "users-table",
+          "target": "join-transform",
+          "animated": true
+        },
+        {
+          "id": "e2",
+          "source": "orders-table",
+          "target": "join-transform",
+          "animated": true
+        },
+        {
+          "id": "e3",
+          "source": "payments-table",
+          "target": "join-transform",
+          "animated": true
+        },
+        {
+          "id": "e4",
+          "source": "join-transform",
+          "target": "customer-metrics",
+          "animated": true
+        },
+        {
+          "id": "e5",
+          "source": "join-transform",
+          "target": "revenue-summary",
+          "animated": true
+        }
+      ]
+    }
+  ]
+}

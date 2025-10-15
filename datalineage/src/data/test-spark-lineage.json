@@ -1,0 +1,412 @@
+{
+  "levels": [
+    {
+      "id": "level-spark",
+      "name": "Spark Job Lineage",
+      "nodes": [
+        {
+          "id": "input-0",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 150
+          },
+          "data": {
+            "label": "<input_path>",
+            "tool": "HDFS",
+            "process": "Source Data",
+            "description": "<input_path>",
+            "metadata": {
+              "path": "<input_path>"
+            }
+          }
+        },
+        {
+          "id": "op-0-0",
+          "type": "default",
+          "position": {
+            "x": 350,
+            "y": 150
+          },
+          "data": {
+            "label": "<OP1",
+            "tool": "Spark",
+            "process": "Operation: <op1",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "<op1",
+              "jobId": "<job_id>"
+            }
+          }
+        },
+        {
+          "id": "op-0-1",
+          "type": "default",
+          "position": {
+            "x": 550,
+            "y": 150
+          },
+          "data": {
+            "label": "OP2",
+            "tool": "Spark",
+            "process": "Operation: op2",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "op2",
+              "jobId": "<job_id>"
+            }
+          }
+        },
+        {
+          "id": "op-0-2",
+          "type": "default",
+          "position": {
+            "x": 750,
+            "y": 150
+          },
+          "data": {
+            "label": "OP3>",
+            "tool": "Spark",
+            "process": "Operation: op3>",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "op3>",
+              "jobId": "<job_id>"
+            }
+          }
+        },
+        {
+          "id": "output-0",
+          "type": "output",
+          "position": {
+            "x": 950,
+            "y": 150
+          },
+          "data": {
+            "label": "<output_path>",
+            "tool": "HDFS",
+            "process": "Output Data",
+            "description": "<output_path>",
+            "metadata": {
+              "path": "<output_path>"
+            }
+          }
+        },
+        {
+          "id": "input-1",
+          "type": "input",
+          "position": {
+            "x": 1200,
+            "y": 150
+          },
+          "data": {
+            "label": "events.parquet",
+            "tool": "HDFS",
+            "process": "Source Data",
+            "description": "hdfs://cluster/data/raw/events.parquet",
+            "metadata": {
+              "path": "hdfs://cluster/data/raw/events.parquet"
+            }
+          }
+        },
+        {
+          "id": "op-1-0",
+          "type": "default",
+          "position": {
+            "x": 1450,
+            "y": 150
+          },
+          "data": {
+            "label": "FILTER",
+            "tool": "Spark",
+            "process": "Operation: filter",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "filter",
+              "jobId": "job_001"
+            }
+          }
+        },
+        {
+          "id": "op-1-1",
+          "type": "default",
+          "position": {
+            "x": 1650,
+            "y": 150
+          },
+          "data": {
+            "label": "SELECT",
+            "tool": "Spark",
+            "process": "Operation: select",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "select",
+              "jobId": "job_001"
+            }
+          }
+        },
+        {
+          "id": "output-1",
+          "type": "output",
+          "position": {
+            "x": 1850,
+            "y": 150
+          },
+          "data": {
+            "label": "events_filtered.parquet",
+            "tool": "HDFS",
+            "process": "Output Data",
+            "description": "hdfs://cluster/data/processed/events_filtered.parquet",
+            "metadata": {
+              "path": "hdfs://cluster/data/processed/events_filtered.parquet"
+            }
+          }
+        },
+        {
+          "id": "input-2",
+          "type": "input",
+          "position": {
+            "x": 2100,
+            "y": 150
+          },
+          "data": {
+            "label": "events_filtered.parquet",
+            "tool": "HDFS",
+            "process": "Source Data",
+            "description": "hdfs://cluster/data/processed/events_filtered.parquet",
+            "metadata": {
+              "path": "hdfs://cluster/data/processed/events_filtered.parquet"
+            }
+          }
+        },
+        {
+          "id": "op-2-0",
+          "type": "default",
+          "position": {
+            "x": 2350,
+            "y": 150
+          },
+          "data": {
+            "label": "GROUPBY",
+            "tool": "Spark",
+            "process": "Operation: groupBy",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "groupBy",
+              "jobId": "job_002"
+            }
+          }
+        },
+        {
+          "id": "op-2-1",
+          "type": "default",
+          "position": {
+            "x": 2550,
+            "y": 150
+          },
+          "data": {
+            "label": "AGGREGATE",
+            "tool": "Spark",
+            "process": "Operation: aggregate",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "aggregate",
+              "jobId": "job_002"
+            }
+          }
+        },
+        {
+          "id": "op-2-2",
+          "type": "default",
+          "position": {
+            "x": 2750,
+            "y": 150
+          },
+          "data": {
+            "label": "SORT",
+            "tool": "Spark",
+            "process": "Operation: sort",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "sort",
+              "jobId": "job_002"
+            }
+          }
+        },
+        {
+          "id": "output-2",
+          "type": "output",
+          "position": {
+            "x": 2950,
+            "y": 150
+          },
+          "data": {
+            "label": "daily_metrics.parquet",
+            "tool": "HDFS",
+            "process": "Output Data",
+            "description": "hdfs://cluster/data/aggregated/daily_metrics.parquet",
+            "metadata": {
+              "path": "hdfs://cluster/data/aggregated/daily_metrics.parquet"
+            }
+          }
+        },
+        {
+          "id": "input-3",
+          "type": "input",
+          "position": {
+            "x": 3200,
+            "y": 150
+          },
+          "data": {
+            "label": "daily_metrics.parquet",
+            "tool": "HDFS",
+            "process": "Source Data",
+            "description": "hdfs://cluster/data/aggregated/daily_metrics.parquet",
+            "metadata": {
+              "path": "hdfs://cluster/data/aggregated/daily_metrics.parquet"
+            }
+          }
+        },
+        {
+          "id": "op-3-0",
+          "type": "default",
+          "position": {
+            "x": 3450,
+            "y": 150
+          },
+          "data": {
+            "label": "JOIN",
+            "tool": "Spark",
+            "process": "Operation: join",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "join",
+              "jobId": "job_003"
+            }
+          }
+        },
+        {
+          "id": "op-3-1",
+          "type": "default",
+          "position": {
+            "x": 3650,
+            "y": 150
+          },
+          "data": {
+            "label": "TRANSFORM",
+            "tool": "Spark",
+            "process": "Operation: transform",
+            "description": "Spark transformation",
+            "metadata": {
+              "operation": "transform",
+              "jobId": "job_003"
+            }
+          }
+        },
+        {
+          "id": "output-3",
+          "type": "output",
+          "position": {
+            "x": 3850,
+            "y": 150
+          },
+          "data": {
+            "label": "metrics_report.parquet",
+            "tool": "HDFS",
+            "process": "Output Data",
+            "description": "hdfs://cluster/data/final/metrics_report.parquet",
+            "metadata": {
+              "path": "hdfs://cluster/data/final/metrics_report.parquet"
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "input-0-op-0-0",
+          "source": "input-0",
+          "target": "op-0-0",
+          "animated": true
+        },
+        {
+          "id": "op-0-0-op-0-1",
+          "source": "op-0-0",
+          "target": "op-0-1",
+          "animated": true
+        },
+        {
+          "id": "op-0-1-op-0-2",
+          "source": "op-0-1",
+          "target": "op-0-2",
+          "animated": true
+        },
+        {
+          "id": "op-0-2-output-0",
+          "source": "op-0-2",
+          "target": "output-0",
+          "animated": true
+        },
+        {
+          "id": "input-1-op-1-0",
+          "source": "input-1",
+          "target": "op-1-0",
+          "animated": true
+        },
+        {
+          "id": "op-1-0-op-1-1",
+          "source": "op-1-0",
+          "target": "op-1-1",
+          "animated": true
+        },
+        {
+          "id": "op-1-1-output-1",
+          "source": "op-1-1",
+          "target": "output-1",
+          "animated": true
+        },
+        {
+          "id": "input-2-op-2-0",
+          "source": "input-2",
+          "target": "op-2-0",
+          "animated": true
+        },
+        {
+          "id": "op-2-0-op-2-1",
+          "source": "op-2-0",
+          "target": "op-2-1",
+          "animated": true
+        },
+        {
+          "id": "op-2-1-op-2-2",
+          "source": "op-2-1",
+          "target": "op-2-2",
+          "animated": true
+        },
+        {
+          "id": "op-2-2-output-2",
+          "source": "op-2-2",
+          "target": "output-2",
+          "animated": true
+        },
+        {
+          "id": "input-3-op-3-0",
+          "source": "input-3",
+          "target": "op-3-0",
+          "animated": true
+        },
+        {
+          "id": "op-3-0-op-3-1",
+          "source": "op-3-0",
+          "target": "op-3-1",
+          "animated": true
+        },
+        {
+          "id": "op-3-1-output-3",
+          "source": "op-3-1",
+          "target": "output-3",
+          "animated": true
+        }
+      ]
+    }
+  ]
+}

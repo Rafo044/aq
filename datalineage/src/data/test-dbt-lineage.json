@@ -1,0 +1,474 @@
+{
+  "levels": [
+    {
+      "id": "level-dbt",
+      "name": "dbt Model Lineage",
+      "nodes": [
+        {
+          "id": "source-<source1>",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 100
+          },
+          "data": {
+            "label": "<source1>",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Raw table: <source1>",
+            "metadata": {
+              "tableName": "<source1>"
+            }
+          }
+        },
+        {
+          "id": "source-<source2>",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 140
+          },
+          "data": {
+            "label": "<source2>",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Raw table: <source2>",
+            "metadata": {
+              "tableName": "<source2>"
+            }
+          }
+        },
+        {
+          "id": "source-...",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 180
+          },
+          "data": {
+            "label": "...",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Raw table: ...",
+            "metadata": {
+              "tableName": "..."
+            }
+          }
+        },
+        {
+          "id": "model-<model_name>",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 100
+          },
+          "data": {
+            "label": "<model_name>",
+            "tool": "dbt",
+            "process": "Transform → View",
+            "description": "dbt model: <model_name>",
+            "metadata": {
+              "modelName": "<model_name>",
+              "modelType": "<table|view>"
+            }
+          }
+        },
+        {
+          "id": "output-<model_name>",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 100
+          },
+          "data": {
+            "label": "<model_name>",
+            "tool": "Snowflake",
+            "process": "View",
+            "description": "Output: <model_name>",
+            "metadata": {
+              "tableName": "<model_name>",
+              "tableType": "<table|view>"
+            }
+          }
+        },
+        {
+          "id": "source-raw_customers",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 220
+          },
+          "data": {
+            "label": "raw_customers",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Raw table: raw_customers",
+            "metadata": {
+              "tableName": "raw_customers"
+            }
+          }
+        },
+        {
+          "id": "model-stg_customers",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 220
+          },
+          "data": {
+            "label": "stg_customers",
+            "tool": "dbt",
+            "process": "Transform → View",
+            "description": "dbt model: stg_customers",
+            "metadata": {
+              "modelName": "stg_customers",
+              "modelType": "view"
+            }
+          }
+        },
+        {
+          "id": "output-stg_customers",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 220
+          },
+          "data": {
+            "label": "stg_customers",
+            "tool": "Snowflake",
+            "process": "View",
+            "description": "Output: stg_customers",
+            "metadata": {
+              "tableName": "stg_customers",
+              "tableType": "view"
+            }
+          }
+        },
+        {
+          "id": "source-raw_orders",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 340
+          },
+          "data": {
+            "label": "raw_orders",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Raw table: raw_orders",
+            "metadata": {
+              "tableName": "raw_orders"
+            }
+          }
+        },
+        {
+          "id": "model-stg_orders",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 340
+          },
+          "data": {
+            "label": "stg_orders",
+            "tool": "dbt",
+            "process": "Transform → View",
+            "description": "dbt model: stg_orders",
+            "metadata": {
+              "modelName": "stg_orders",
+              "modelType": "view"
+            }
+          }
+        },
+        {
+          "id": "output-stg_orders",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 340
+          },
+          "data": {
+            "label": "stg_orders",
+            "tool": "Snowflake",
+            "process": "View",
+            "description": "Output: stg_orders",
+            "metadata": {
+              "tableName": "stg_orders",
+              "tableType": "view"
+            }
+          }
+        },
+        {
+          "id": "source-raw_payments",
+          "type": "input",
+          "position": {
+            "x": 100,
+            "y": 460
+          },
+          "data": {
+            "label": "raw_payments",
+            "tool": "PostgreSQL",
+            "process": "Source Table",
+            "description": "Raw table: raw_payments",
+            "metadata": {
+              "tableName": "raw_payments"
+            }
+          }
+        },
+        {
+          "id": "model-stg_payments",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 460
+          },
+          "data": {
+            "label": "stg_payments",
+            "tool": "dbt",
+            "process": "Transform → View",
+            "description": "dbt model: stg_payments",
+            "metadata": {
+              "modelName": "stg_payments",
+              "modelType": "view"
+            }
+          }
+        },
+        {
+          "id": "output-stg_payments",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 460
+          },
+          "data": {
+            "label": "stg_payments",
+            "tool": "Snowflake",
+            "process": "View",
+            "description": "Output: stg_payments",
+            "metadata": {
+              "tableName": "stg_payments",
+              "tableType": "view"
+            }
+          }
+        },
+        {
+          "id": "model-int_customer_orders",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 580
+          },
+          "data": {
+            "label": "int_customer_orders",
+            "tool": "dbt",
+            "process": "Transform → Materialized Table",
+            "description": "dbt model: int_customer_orders",
+            "metadata": {
+              "modelName": "int_customer_orders",
+              "modelType": "table"
+            }
+          }
+        },
+        {
+          "id": "output-int_customer_orders",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 580
+          },
+          "data": {
+            "label": "int_customer_orders",
+            "tool": "Snowflake",
+            "process": "Table",
+            "description": "Output: int_customer_orders",
+            "metadata": {
+              "tableName": "int_customer_orders",
+              "tableType": "table"
+            }
+          }
+        },
+        {
+          "id": "model-fct_customer_metrics",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 700
+          },
+          "data": {
+            "label": "fct_customer_metrics",
+            "tool": "dbt",
+            "process": "Transform → Materialized Table",
+            "description": "dbt model: fct_customer_metrics",
+            "metadata": {
+              "modelName": "fct_customer_metrics",
+              "modelType": "table"
+            }
+          }
+        },
+        {
+          "id": "output-fct_customer_metrics",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 700
+          },
+          "data": {
+            "label": "fct_customer_metrics",
+            "tool": "Snowflake",
+            "process": "Table",
+            "description": "Output: fct_customer_metrics",
+            "metadata": {
+              "tableName": "fct_customer_metrics",
+              "tableType": "table"
+            }
+          }
+        },
+        {
+          "id": "model-dim_customers",
+          "type": "default",
+          "position": {
+            "x": 400,
+            "y": 820
+          },
+          "data": {
+            "label": "dim_customers",
+            "tool": "dbt",
+            "process": "Transform → Materialized Table",
+            "description": "dbt model: dim_customers",
+            "metadata": {
+              "modelName": "dim_customers",
+              "modelType": "table"
+            }
+          }
+        },
+        {
+          "id": "output-dim_customers",
+          "type": "output",
+          "position": {
+            "x": 700,
+            "y": 820
+          },
+          "data": {
+            "label": "dim_customers",
+            "tool": "Snowflake",
+            "process": "Table",
+            "description": "Output: dim_customers",
+            "metadata": {
+              "tableName": "dim_customers",
+              "tableType": "table"
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "source-<source1>-model-<model_name>",
+          "source": "source-<source1>",
+          "target": "model-<model_name>",
+          "animated": true
+        },
+        {
+          "id": "source-<source2>-model-<model_name>",
+          "source": "source-<source2>",
+          "target": "model-<model_name>",
+          "animated": true
+        },
+        {
+          "id": "source-...-model-<model_name>",
+          "source": "source-...",
+          "target": "model-<model_name>",
+          "animated": true
+        },
+        {
+          "id": "model-<model_name>-output-<model_name>",
+          "source": "model-<model_name>",
+          "target": "output-<model_name>",
+          "animated": true
+        },
+        {
+          "id": "source-raw_customers-model-stg_customers",
+          "source": "source-raw_customers",
+          "target": "model-stg_customers",
+          "animated": true
+        },
+        {
+          "id": "model-stg_customers-output-stg_customers",
+          "source": "model-stg_customers",
+          "target": "output-stg_customers",
+          "animated": true
+        },
+        {
+          "id": "source-raw_orders-model-stg_orders",
+          "source": "source-raw_orders",
+          "target": "model-stg_orders",
+          "animated": true
+        },
+        {
+          "id": "model-stg_orders-output-stg_orders",
+          "source": "model-stg_orders",
+          "target": "output-stg_orders",
+          "animated": true
+        },
+        {
+          "id": "source-raw_payments-model-stg_payments",
+          "source": "source-raw_payments",
+          "target": "model-stg_payments",
+          "animated": true
+        },
+        {
+          "id": "model-stg_payments-output-stg_payments",
+          "source": "model-stg_payments",
+          "target": "output-stg_payments",
+          "animated": true
+        },
+        {
+          "id": "model-stg_customers-model-int_customer_orders",
+          "source": "model-stg_customers",
+          "target": "model-int_customer_orders",
+          "animated": true
+        },
+        {
+          "id": "model-stg_orders-model-int_customer_orders",
+          "source": "model-stg_orders",
+          "target": "model-int_customer_orders",
+          "animated": true
+        },
+        {
+          "id": "model-int_customer_orders-output-int_customer_orders",
+          "source": "model-int_customer_orders",
+          "target": "output-int_customer_orders",
+          "animated": true
+        },
+        {
+          "id": "model-int_customer_orders-model-fct_customer_metrics",
+          "source": "model-int_customer_orders",
+          "target": "model-fct_customer_metrics",
+          "animated": true
+        },
+        {
+          "id": "model-stg_payments-model-fct_customer_metrics",
+          "source": "model-stg_payments",
+          "target": "model-fct_customer_metrics",
+          "animated": true
+        },
+        {
+          "id": "model-fct_customer_metrics-output-fct_customer_metrics",
+          "source": "model-fct_customer_metrics",
+          "target": "output-fct_customer_metrics",
+          "animated": true
+        },
+        {
+          "id": "model-stg_customers-model-dim_customers",
+          "source": "model-stg_customers",
+          "target": "model-dim_customers",
+          "animated": true
+        },
+        {
+          "id": "model-dim_customers-output-dim_customers",
+          "source": "model-dim_customers",
+          "target": "output-dim_customers",
+          "animated": true
+        }
+      ]
+    }
+  ]
+}
