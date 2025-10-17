@@ -1,0 +1,9 @@
+{
+  "name": "openaq",
+  "description": "A minimal MCP server exposing a single function over SSE.",
+  "command": "http://0.0.0.0:8000",
+  "transport": "sse",
+  "capabilities": {
+    "tools": true
+  }
+}
