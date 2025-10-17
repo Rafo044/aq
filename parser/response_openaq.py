@@ -19,7 +19,7 @@ def get_response(sensor_id: str, start_date: str, delta_days: int) -> dict:
     Args:
         sensor_id (str): The ID of the sensor.
         start_date (str): The start date in the format "YYYY-MM-DD".
-        delta_days (int): The number of days to include in the response.
+        delta_days (int): The number of days to interval start date.
 
     Returns:
         dict: The response dictionary.
